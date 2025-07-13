@@ -4,7 +4,7 @@ import { AuthResponse, Post, CreatePostData } from '../types';
 // 🔧 CONFIGURACIÓN DE CONEXIÓN AL BACKEND
 // Para desarrollo local: 'http://localhost:5000/api'
 // Para producción: 'https://tu-backend-en-render.com/api'
-const API_BASE_URL = 'https://backendblog-glhs.onrender.com/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://backendblog-glhs.onrender.com/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -27,11 +27,15 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.error('API Error:', error.response?.data || error.message);
+    if (import.meta.env.DEV) {
+      console.error('API Error:', error.response?.data || error.message);
+    }
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      window.location.href = '/';
+      if (typeof window !== 'undefined') {
+        window.location.href = '/';
+      }
     }
     return Promise.reject(error);
   }
