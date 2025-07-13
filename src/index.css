@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-gray-200 dark:border-gray-700;
+  }
+  body {
+    @apply bg-gradient-to-br from-slate-50 to-blue-50 text-slate-900 font-sans dark:from-gray-900 dark:to-gray-800 dark:text-gray-100;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .glass-effect {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-xl dark:bg-gray-800/80 dark:border-gray-700/20;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium px-6 py-3 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 dark:from-blue-500 dark:to-blue-600 dark:hover:from-blue-600 dark:hover:to-blue-700;
+  }
+  
+  .btn-secondary {
+    @apply bg-white hover:bg-gray-50 text-gray-700 font-medium px-6 py-3 rounded-lg border border-gray-200 transition-all duration-200 shadow-sm hover:shadow-md dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:border-gray-600;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white/50 backdrop-blur-sm dark:bg-gray-700/50 dark:border-gray-600 dark:text-gray-200 dark:placeholder-gray-400 dark:focus:ring-blue-400;
+  }
+  
+  .image-zoom-cursor {
+    cursor: zoom-in;
+  }
+  
+  .image-zoom-cursor:hover {
+    transform: scale(1.02);
+  }
+}
+
+.sidebar-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+/* Animaciones para el modal de imágenes */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes imageZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-fade-in {
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+.image-zoom-in {
+  animation: imageZoomIn 0.3s ease-out;
+}
+/* Estilos para el perfil estilo Instagram */
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+/* Grid responsivo para publicaciones */
+@media (max-width: 640px) {
+  .grid-cols-3 {
+    gap: 0.125rem;
+  }
+}
+
+/* Efectos hover para las publicaciones */
+.group:hover .group-hover\:bg-opacity-50 {
+  background-opacity: 0.5;
+}
+
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
